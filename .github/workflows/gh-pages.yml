@@ -1,0 +1,36 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Set a branch name to trigger deployment
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: Build
+        run: REACT_APP_GOOGLE_CLIENT_ID=${{secrets.GOOGLE_CLIENT_ID}} REACT_APP_GOOGLE_CLIENT_SECRET=${{secrets.GOOGLE_CLIENT_SECRET}} npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        # If you're changing the branch from main,
+        # also change the `main` in `refs/heads/main`
+        # below accordingly.
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
