@@ -4,7 +4,7 @@ import {useLoader} from "../component/loader/LoaderContext";
 import {GmailApi} from "../api/GmailApi";
 
 const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
-const SCOPES = 'https://mail.google.com/';
+const SCOPES = 'https://www.googleapis.com/auth/gmail.compose';
 
 export const AuthContext = React.createContext();
 export const useAuth = () => React.useContext(AuthContext);

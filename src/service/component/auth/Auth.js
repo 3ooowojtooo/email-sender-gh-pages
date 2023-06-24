@@ -6,7 +6,7 @@ function Auth() {
 
     let notLoggedInContent = <>
         Niezalogowany
-        <button onClick={logIn}>Zaloguj</button>
+        <button onClick={logIn}>Zaloguj do Gmail</button>
     </>
 
     let loggedInContent = <>
