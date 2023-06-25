@@ -29,7 +29,7 @@ function Timer({draftId, clearDraftId, clearForm}) {
     let shouldBeVisible = () => !(draftId === "" || draftId == null)
 
     let startTimer = () => {
-        const newExpiryTimestamp = new Date(date.valueOf() - offsetMs)
+        const newExpiryTimestamp = new Date(date.valueOf() + offsetMs)
         restart(newExpiryTimestamp, true)
         setTimerRunning(true)
     }
@@ -67,7 +67,7 @@ function Timer({draftId, clearDraftId, clearForm}) {
         else if (offsetMs > 0)
             return "plus " + offsetMs + " milisekund"
         else
-            return "minus " + offsetMs + " milisekund"
+            return "minus " + (-1 * offsetMs) + " milisekund"
     }
 
     return (
