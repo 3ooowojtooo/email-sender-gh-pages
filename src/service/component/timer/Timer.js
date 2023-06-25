@@ -5,14 +5,14 @@ import {Form} from "react-bootstrap";
 import {useTimer} from "react-timer-hook";
 import {useAuth} from "../../auth/AuthContextProvider";
 
-const DEFAULT_BEFORE_MS = 10
+const DEFAULT_OFFSET_MS = parseInt(process.env.REACT_APP_OFFSET_MS)
 const DEFAULT_DATE = new Date()
 DEFAULT_DATE.setMilliseconds(0)
 
 function Timer({draftId, clearDraftId, clearForm}) {
 
     const [date, setDate] = useState(DEFAULT_DATE)
-    const [beforeMs, setBeforeMs] = useState(DEFAULT_BEFORE_MS)
+    const [offsetMs, setOffsetMs] = useState(DEFAULT_OFFSET_MS)
     const [timerRunning, setTimerRunning] = useState(false)
 
     const {getGmailApi} = useAuth()
@@ -29,7 +29,7 @@ function Timer({draftId, clearDraftId, clearForm}) {
     let shouldBeVisible = () => !(draftId === "" || draftId == null)
 
     let startTimer = () => {
-        const newExpiryTimestamp = new Date(date.valueOf() - beforeMs)
+        const newExpiryTimestamp = new Date(date.valueOf() - offsetMs)
         restart(newExpiryTimestamp, true)
         setTimerRunning(true)
     }
@@ -61,6 +61,15 @@ function Timer({draftId, clearDraftId, clearForm}) {
         setTimerRunning(false)
     }
 
+    let displayOffsetMs = () => {
+        if (offsetMs === 0)
+            return ""
+        else if (offsetMs > 0)
+            return "plus " + offsetMs + " milisekund"
+        else
+            return "minus " + offsetMs + " milisekund"
+    }
+
     return (
         shouldBeVisible() ?
             <div>
@@ -80,17 +89,17 @@ function Timer({draftId, clearDraftId, clearForm}) {
                         />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Wybierz ile milisekund przed wybranym czasem mail ma zostać wysłany</Form.Label><br/>
-                        <Form.Control type="number" value={beforeMs}
-                                      min={0} size="lg"
-                                      onChange={event => setBeforeMs(parseInt(event.target.value))}/>
+                        <Form.Label>Wybierz ile milisekund przed/po wybramym czasie mail ma zostać wysłany</Form.Label><br/>
+                        <Form.Control type="number" value={offsetMs}
+                                      size="lg"
+                                      onChange={event => setOffsetMs(parseInt(event.target.value))}/>
                     </Form.Group>
                 </Form><br/>
                 <button disabled={timerRunning} onClick={startTimer}>Zaplanuj wysłanie</button><br/>
                 {
                     timerRunning ?
                         <>
-                            <span>Wysyłka zaplanowana na {date.toLocaleString()} minus {beforeMs} milisekund.</span><br/>
+                            <span>Wysyłka zaplanowana na {date.toLocaleString()} {displayOffsetMs()}</span><br/>
                             <span>Czas do wysłania: <b>{hours}:{minutes}:{seconds}</b></span><br/>
                             <button onClick={onCancel}>Przerwij</button>
                         </>

@@ -23,7 +23,7 @@ jobs:
         run: npm install --force
 
       - name: Build
-        run: REACT_APP_GOOGLE_CLIENT_ID=${{secrets.GOOGLE_CLIENT_ID}} REACT_APP_GOOGLE_CLIENT_SECRET=${{secrets.GOOGLE_CLIENT_SECRET}} npm run build
+        run: REACT_APP_GOOGLE_CLIENT_ID=${{secrets.GOOGLE_CLIENT_ID}} REACT_APP_GOOGLE_CLIENT_SECRET=${{secrets.GOOGLE_CLIENT_SECRET}} REACT_APP_OFFSET_MS=${{secrets.OFFSET_MS}} npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
