@@ -540,12 +540,12 @@ self.__precacheManifest = [
     "url": "/email-sender-gh-pages/static/js/134.66f8e987.chunk.js"
   },
   {
-    "revision": "e3f98e13c35b4fa0d831",
+    "revision": "bb2c91dd382152204276",
     "url": "/email-sender-gh-pages/static/css/main.16e1d438.chunk.css"
   },
   {
-    "revision": "e3f98e13c35b4fa0d831",
-    "url": "/email-sender-gh-pages/static/js/main.0926e275.chunk.js"
+    "revision": "bb2c91dd382152204276",
+    "url": "/email-sender-gh-pages/static/js/main.70b29cf1.chunk.js"
   },
   {
     "revision": "67807acafc27721f1889",
@@ -580,7 +580,7 @@ self.__precacheManifest = [
     "url": "/email-sender-gh-pages/static/media/fontawesome-webfont.912ec66d.svg"
   },
   {
-    "revision": "bc58a07a00b46f233d087c9b76529caf",
+    "revision": "fdbef820b28e7a4b2bce858461879b08",
     "url": "/email-sender-gh-pages/index.html"
   }
 ];
