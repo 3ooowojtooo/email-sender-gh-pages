@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/email-sender-gh-pages/precache-manifest.cd55fd45d877d0a92937769840124fb5.js"
+  "/email-sender-gh-pages/precache-manifest.4720761531f369c82858545db01cef92.js"
 );
 
 workbox.clientsClaim();
