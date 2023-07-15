@@ -14,6 +14,7 @@ function Main() {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [files, setFiles] = useState([])
+    const [draftIdTyped, setDraftIdTyped] = useState("")
 
     const [draftId, setDraftId] = useState("")
 
@@ -85,6 +86,11 @@ function Main() {
         setTo("")
         setTitle("")
         setContent("")
+        setDraftIdTyped("")
+    }
+
+    let typedDraftButtonOnClick = () => {
+        saveDraftId(draftIdTyped)
     }
 
     return (
@@ -121,8 +127,17 @@ function Main() {
                         <Form.Label>Załączniki</Form.Label><br/>
                         <FileBase64 multiple={true} onDone={onFilesSelected}/><br/>
                     </Form.Group><br/>
+                    <Form.Group className="mb-3" controlId="draftIdTyped">
+                        <Form.Label>Albo podaj draft id:</Form.Label><br/>
+                        <Form.Control as="textarea"
+                                      placeholder="Wpisz draft id" value={draftIdTyped}
+                                      size="lg"
+                                      disabled={isDraftIdSet()}
+                                      onChange={event => setDraftIdTyped(event.target.value)}/>
+                    </Form.Group>
                 </Form>
                 <button disabled={isDraftIdSet()} onClick={createDraft}>Stwórz wersję roboczą</button>
+                <button disabled={isDraftIdSet()} onClick={typedDraftButtonOnClick}>Użyj wpisanego draft id</button>
                 <Timer draftId={draftId} clearDraftId={deleteDraftId} clearForm={clearFields}/>
             </div>
             : <></>
